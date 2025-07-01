@@ -1,9 +1,10 @@
 import type { RouteObject } from 'react-router-dom';
-import { Home } from '../pages/Home';
-import { Login } from '../pages/Login';
-import { Dashboard } from '../pages/Dashboard';
+import { Home } from '../pages/public/Home';
+import { Login } from '../pages/auth/Login';
+import { Dashboard } from '../pages/dashboard/Dashboard';
 import { ProtectedRoute } from '../components/ProtectedRoute';
 import { PublicRoute } from '../components/PublicRoute';
+import { RoleGuard } from '../components/common/RoleGuard';
 
 export const publicRoutes: RouteObject[] = [
     {
@@ -24,9 +25,6 @@ export const publicRoutes: RouteObject[] = [
     },
 ];
 
-
-// Protected routes that require authentication
-// These routes will be wrapped in the ProtectedRoute component to ensure the user is authenticated before accessing
 export const protectedRoutes: RouteObject[] = [
     {
         path: '/dashboard',
@@ -36,30 +34,33 @@ export const protectedRoutes: RouteObject[] = [
             </ProtectedRoute>
         ),
     },
-   
     {
-        path: '/profile',
+        path: '/admin',
         element: (
             <ProtectedRoute>
-                <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-                    <div className="bg-white p-8 rounded-lg shadow-md text-center">
-                        <h2 className="text-2xl font-bold text-gray-900 mb-4">Profile Page</h2>
-                        <p className="text-gray-600">Coming Soon</p>
+                <RoleGuard allowedRoles={['admin']}>
+                    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+                        <div className="bg-white p-8 rounded-lg shadow-md text-center">
+                            <h2 className="text-2xl font-bold text-gray-900 mb-4">Admin Panel</h2>
+                            <p className="text-gray-600">Advanced admin features coming soon</p>
+                        </div>
                     </div>
-                </div>
+                </RoleGuard>
             </ProtectedRoute>
         ),
     },
     {
-        path: '/transactions',
+        path: '/manager',
         element: (
             <ProtectedRoute>
-                <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-                    <div className="bg-white p-8 rounded-lg shadow-md text-center">
-                        <h2 className="text-2xl font-bold text-gray-900 mb-4">Transactions Page</h2>
-                        <p className="text-gray-600">Coming Soon</p>
+                <RoleGuard allowedRoles={['admin', 'manager']}>
+                    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+                        <div className="bg-white p-8 rounded-lg shadow-md text-center">
+                            <h2 className="text-2xl font-bold text-gray-900 mb-4">Manager Tools</h2>
+                            <p className="text-gray-600">Manager-specific tools coming soon</p>
+                        </div>
                     </div>
-                </div>
+                </RoleGuard>
             </ProtectedRoute>
         ),
     },

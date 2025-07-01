@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext';
 import { Navigate, useLocation } from 'react-router-dom';
 
 export const Login: React.FC = () => {
@@ -21,7 +22,7 @@ export const Login: React.FC = () => {
 
         try {
             await login(email, password);
-        } catch (err) {
+        } catch (_err: unknown) {
             setError('Invalid email or password');
         }
     };
@@ -39,21 +40,21 @@ export const Login: React.FC = () => {
                         <div>
                             <input
                                 type="email"
-                                placeholder="Email (admin@chaabi.com)"
+                                placeholder="Email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                className="text-gray-700 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                             />
                         </div>
                         <div>
                             <input
                                 type="password"
-                                placeholder="Password (password)"
+                                placeholder="Password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                className="text-gray-700 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                             />
                         </div>
                         {error && (
@@ -76,6 +77,14 @@ export const Login: React.FC = () => {
                             )}
                         </button>
                     </form>
+                    <div className="mt-6 text-center">
+                        <div className="text-sm text-gray-600 mb-2">Test Credentials:</div>
+                        <div className="space-y-1 text-xs text-gray-500">
+                            <div>Admin: admin@chaabi.com / password</div>
+                            <div>Manager: manager@chaabi.com / password</div>
+                            <div>Customer: customer@chaabi.com / password</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
