@@ -5,7 +5,7 @@ interface User {
     id: string;
     email: string;
     name: string;
-    role: 'admin' | 'customer' | 'manager';
+    role: 'agent' | 'responsable';
 }
 
 interface AuthContextType {
@@ -46,7 +46,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                     id: '1',
                     email: 'user@example.com',
                     name: 'John Doe',
-                    role: 'customer'
+                    role: 'agent'
                 });
                 setIsLoading(false);
             }, 1000);
@@ -62,31 +62,24 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             await new Promise(resolve => setTimeout(resolve, 1000));
 
             let userData: User;
-            if (email === 'admin@chaabi.com' && password === 'password') {
+            if (email === 'responsable@chaabi.com' && password === 'password') {
                 userData = {
                     id: '1',
                     email,
-                    name: 'Admin User',
-                    role: 'admin'
+                    name: 'Responsable User',
+                    role: 'responsable'
                 };
-            } else if (email === 'manager@chaabi.com' && password === 'password') {
+            } else if (email === 'agent@chaabi.com' && password === 'password') {
                 userData = {
                     id: '2',
                     email,
-                    name: 'Manager User',
-                    role: 'manager'
-                };
-            } else if (email === 'customer@chaabi.com' && password === 'password') {
-                userData = {
-                    id: '3',
-                    email,
-                    name: 'Customer User',
-                    role: 'customer'
+                    name: 'Agent User',
+                    role: 'agent'
                 };
             } else {
                 throw new Error('Invalid credentials');
             }
-
+            
             setUser(userData);
             localStorage.setItem('authToken', 'mock-token-123');
         } finally {

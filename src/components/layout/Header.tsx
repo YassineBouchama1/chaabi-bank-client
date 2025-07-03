@@ -10,7 +10,7 @@ export const Header: React.FC<HeaderProps> = ({ sidebarOpen, setSidebarOpen }) =
     const { user, logout } = useAuth();
 
     return (
-      <header className="bg-white shadow-sm border-b border-gray-200">
+      <header className="fixed md:ml-65 left-0 right-0 bg-white shadow-sm border-b border-gray-200 ">
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-4">

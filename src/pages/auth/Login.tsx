@@ -80,9 +80,8 @@ export const Login: React.FC = () => {
                     <div className="mt-6 text-center">
                         <div className="text-sm text-gray-600 mb-2">Test Credentials:</div>
                         <div className="space-y-1 text-xs text-gray-500">
-                            <div>Admin: admin@chaabi.com / password</div>
-                            <div>Manager: manager@chaabi.com / password</div>
-                            <div>Customer: customer@chaabi.com / password</div>
+                            <div>Responsable: responsable@chaabi.com / password</div>
+                            <div>Agent: agent@chaabi.com / password</div>
                         </div>
                     </div>
                 </div>
@@ -90,3 +89,4 @@ export const Login: React.FC = () => {
         </div>
     );
 };
+

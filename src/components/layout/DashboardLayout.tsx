@@ -33,7 +33,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
                 <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
                 {/* Main content  < here we put all content of each page in dashvoard >*/}
-                <main className="p-6">
+                <main className="p-6 pt-26">
                     {children}
                 </main>
             </div>

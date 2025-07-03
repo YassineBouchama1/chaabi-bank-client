@@ -5,6 +5,7 @@ import { Dashboard } from '../pages/dashboard/Dashboard';
 import { ProtectedRoute } from '../components/ProtectedRoute';
 import { PublicRoute } from '../components/PublicRoute';
 import { RoleGuard } from '../components/common/RoleGuard';
+import { CreateDemand } from '../pages/dashboard/CreateDemand';
 
 export const publicRoutes: RouteObject[] = [
     {
@@ -34,15 +35,26 @@ export const protectedRoutes: RouteObject[] = [
             </ProtectedRoute>
         ),
     },
+
     {
-        path: '/admin',
+        path: '/dashboard/demands/create',
         element: (
             <ProtectedRoute>
-                <RoleGuard allowedRoles={['admin']}>
+                <RoleGuard allowedRoles={['agent', 'responsable']}>
+                    <CreateDemand />
+                </RoleGuard>
+            </ProtectedRoute>
+        ),
+    },
+    {
+        path: '/dashboard/demands/:id',
+        element: (
+            <ProtectedRoute>
+                <RoleGuard allowedRoles={['agent', 'responsable']}>
                     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
                         <div className="bg-white p-8 rounded-lg shadow-md text-center">
-                            <h2 className="text-2xl font-bold text-gray-900 mb-4">Admin Panel</h2>
-                            <p className="text-gray-600">Advanced admin features coming soon</p>
+                            <h2 className="text-2xl font-bold text-gray-900 mb-4">Demand Details</h2>
+                            <p className="text-gray-600">View detailed information about a specific demand</p>
                         </div>
                     </div>
                 </RoleGuard>
@@ -50,14 +62,30 @@ export const protectedRoutes: RouteObject[] = [
         ),
     },
     {
-        path: '/manager',
+        path: '/dashboard/demands/:id/edit',
         element: (
             <ProtectedRoute>
-                <RoleGuard allowedRoles={['admin', 'manager']}>
+                <RoleGuard allowedRoles={['agent']}>
                     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
                         <div className="bg-white p-8 rounded-lg shadow-md text-center">
-                            <h2 className="text-2xl font-bold text-gray-900 mb-4">Manager Tools</h2>
-                            <p className="text-gray-600">Manager-specific tools coming soon</p>
+                            <h2 className="text-2xl font-bold text-gray-900 mb-4">Edit Demand</h2>
+                            <p className="text-gray-600">Edit demand details - Agent Only</p>
+                        </div>
+                    </div>
+                </RoleGuard>
+            </ProtectedRoute>
+        ),
+    },
+   
+    {
+        path: '/dashboard/profile',
+        element: (
+            <ProtectedRoute>
+                <RoleGuard allowedRoles={['agent', 'responsable']}>
+                    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+                        <div className="bg-white p-8 rounded-lg shadow-md text-center">
+                            <h2 className="text-2xl font-bold text-gray-900 mb-4">My Profile</h2>
+                            <p className="text-gray-600">Manage your profile settings</p>
                         </div>
                     </div>
                 </RoleGuard>
